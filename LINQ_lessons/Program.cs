@@ -63,7 +63,8 @@ namespace LINQ_lessons
                     LINQSelect();
                     LINQWhere();
                     LINQOrderBy();
-
+                    LINQOrderByDescending();
+                    LINQThenBy();
 
 
                     Console.WriteLine("Введите \"е\" для выхода");
@@ -90,7 +91,7 @@ namespace LINQ_lessons
         static void LINQSelect()
         {
             var sortArray = commands.Select((x, Index) => $"Индекс строки: {Index + 1}; Длина строки: " + x.Length).Where((x, Index) => (Index + 1) % 4 == 0);
-            Console.WriteLine("Команда Select + Where");
+            Console.WriteLine("Команда Select");
             Console.WriteLine("Длина каждой четвертой строки");
             Console.WriteLine("");
             foreach (var command in sortArray)
@@ -106,8 +107,39 @@ namespace LINQ_lessons
         {
             var sortArray = commands.Where((x, Index) => (Index + 1) % 4 == 0)
                 .OrderBy(x => x.Length);
+            Console.WriteLine("Команда OrderBy");
+            Console.WriteLine("Длина каждой четвертой строки, с сортировкой по длине строки");
+            Console.WriteLine("");
+            foreach (var command in sortArray)
+            {
+                Console.WriteLine(command);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Thread.Sleep(sleepTime);
+        }
 
-            Console.WriteLine("Команда Select + Where");
+        static void LINQOrderByDescending()
+        {
+            var sortArray = commands.Where((x, Index) => (Index + 1) % 4 == 0)
+                .OrderByDescending(x => x.Length);
+            Console.WriteLine("Команда OrderByDescending");
+            Console.WriteLine("Длина каждой четвертой строки, с сортировкой по длине строки по убыванию");
+            Console.WriteLine("");
+            foreach (var command in sortArray)
+            {
+                Console.WriteLine(command);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Thread.Sleep(sleepTime);
+        }
+
+        static void LINQThenBy()
+        {
+            var sortArray = commands.OrderByDescending(x => x.Length)
+                .ThenBy(x => x.Contains("ы"));
+            Console.WriteLine("Команда ThenBy");
             Console.WriteLine("Длина каждой четвертой строки");
             Console.WriteLine("");
             foreach (var command in sortArray)
