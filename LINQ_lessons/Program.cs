@@ -65,6 +65,7 @@ namespace LINQ_lessons
                     LINQOrderBy();
                     LINQOrderByDescending();
                     LINQThenBy();
+                    LINQThenByDescending();
 
 
                     Console.WriteLine("Введите \"е\" для выхода");
@@ -138,9 +139,25 @@ namespace LINQ_lessons
         static void LINQThenBy()
         {
             var sortArray = commands.OrderByDescending(x => x.Length)
-                .ThenBy(x => x.Contains("ы"));
+                .ThenBy(x => x.Contains("ключу"));
             Console.WriteLine("Команда ThenBy");
-            Console.WriteLine("Длина каждой четвертой строки");
+            Console.WriteLine("Сортировка по длине и по слову \"ключу\"");
+            Console.WriteLine("");
+            foreach (var command in sortArray)
+            {
+                Console.WriteLine(command);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Thread.Sleep(sleepTime);
+        }
+
+        static void LINQThenByDescending()
+        {
+            var sortArray = commands.OrderByDescending(x => x.Length)
+                .ThenByDescending(x => x.Contains("ключу"));
+            Console.WriteLine("Команда ThenBy");
+            Console.WriteLine("Сортировка по длине и по слову \"ключу\"");
             Console.WriteLine("");
             foreach (var command in sortArray)
             {
