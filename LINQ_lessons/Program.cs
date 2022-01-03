@@ -62,6 +62,7 @@ namespace LINQ_lessons
                     Console.Clear();
                     LINQSelect();
                     LINQWhere();
+                    LINQOrderBy();
 
 
 
@@ -71,9 +72,24 @@ namespace LINQ_lessons
             }
         }
 
+        static void LINQWhere()
+        {
+            var sortArray = commands.Where(x => x.Length % 4==0);
+            Console.WriteLine("Команда Where");
+            Console.WriteLine("Строки в которых кол-во символов кратно 4");
+            Console.WriteLine("");
+            foreach (var command in sortArray)
+            {
+                Console.WriteLine(command);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Thread.Sleep(sleepTime);
+        }
+
         static void LINQSelect()
         {
-            var sortArray = commands.Select((x, Index)=> $"Индекс строки: {Index+1}; Длина строки: "+ x.Length).Where((x, Index) => (Index+1) % 4==0);
+            var sortArray = commands.Select((x, Index) => $"Индекс строки: {Index + 1}; Длина строки: " + x.Length).Where((x, Index) => (Index + 1) % 4 == 0);
             Console.WriteLine("Команда Select + Where");
             Console.WriteLine("Длина каждой четвертой строки");
             Console.WriteLine("");
@@ -86,11 +102,13 @@ namespace LINQ_lessons
             Thread.Sleep(sleepTime);
         }
 
-        static void LINQWhere()
+        static void LINQOrderBy()
         {
-            var sortArray = commands.Where(x => x.Length % 4==0);
-            Console.WriteLine("Команда Where");
-            Console.WriteLine("Строки в которых кол-во символов кратно 4");
+            var sortArray = commands.Where((x, Index) => (Index + 1) % 4 == 0)
+                .OrderBy(x => x.Length);
+
+            Console.WriteLine("Команда Select + Where");
+            Console.WriteLine("Длина каждой четвертой строки");
             Console.WriteLine("");
             foreach (var command in sortArray)
             {
