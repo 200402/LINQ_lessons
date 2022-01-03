@@ -34,6 +34,7 @@ namespace LINQ_lessons
             "Skip: пропускает определенное количество элементов",
             "1","2","0","3","5","4","7","789","13","555",
             "а","А","Ф","Ц","Б","в","В","Б","аБв","АБв","абв",
+            "а","А","Ф","Ц","Б","в","В","Б","аБв","АБв","абв",
             "TakeWhile: возвращает цепочку элементов последовательности, до тех пор, пока условие истинно",
             "SkipWhile: пропускает элементы в последовательности, пока они удовлетворяют заданному условию, и затем возвращает оставшиеся элементы",
             "Concat: объединяет две коллекции",
@@ -66,6 +67,7 @@ namespace LINQ_lessons
                     LINQOrderByDescending();
                     LINQThenBy();
                     LINQThenByDescending();
+                    LINQGroupBy();
 
 
                     Console.WriteLine("Введите \"е\" для выхода");
@@ -156,7 +158,22 @@ namespace LINQ_lessons
         {
             var sortArray = commands.OrderByDescending(x => x.Length)
                 .ThenByDescending(x => x.Contains("ключу"));
-            Console.WriteLine("Команда ThenBy");
+            Console.WriteLine("Команда ThenByDescending");
+            Console.WriteLine("Сортировка по длине и по слову \"ключу\"");
+            Console.WriteLine("");
+            foreach (var command in sortArray)
+            {
+                Console.WriteLine(command);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Thread.Sleep(sleepTime);
+        }
+
+        static void LINQGroupBy()
+        {
+            var sortArray = commands.GroupBy(x => x).Where(x=>x.Count()>1).Select(x => x.Key);
+            Console.WriteLine("Команда GroupBy");
             Console.WriteLine("Сортировка по длине и по слову \"ключу\"");
             Console.WriteLine("");
             foreach (var command in sortArray)
